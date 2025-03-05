@@ -1,0 +1,33 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-3">User List</h2>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+    <ul class="list-group">
+
+      <li class="list-group-item" *ngFor="let user of users">
+        <strong>{{ user.name }}</strong> ({{ user.email }}) <br>
+        <span class="text-muted">
+          {{ user.address.street }}, {{ user.address.suite }},
+          {{ user.address.city }} - {{ user.address.zipcode }}
+        </span>
+        <br>
+        <span class="badge bg-primary" style="cursor:pointer;" 
+              (click)="loadUserPosts(user.id, user.name)">
+          Posts: {{ user.postCount || 0 }}
+        </span>
+      </li>
+    </ul>
+    
+    <div *ngIf="selectedUserPosts.length > 0" class="mt-4">
+      <h4>{{ selectedUserName }}'s Posts</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let post of selectedUserPosts">
+          <strong>{{ post.title }}</strong>
+          <p>{{ post.body }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
